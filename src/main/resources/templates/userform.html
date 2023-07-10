@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Register</title>
+		<link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+				integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+				crossorigin="anonymous">
+	</script>
+	</head>
+	<body style="background-color: black; color: green; text-align: center">
+		<div id="lights"></div>
+		<h2>Register a participant</h2>
+		<br>
+		<form action="#" th:action="@{/createuser}" th:object="${player}" method="post">
+			<span id="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br />
+			<span>e-mail:&nbsp;<input type="text" th:field="*{email}" /><br />
+			</span>
+			<span id="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span><br />
+			<span>Name:&nbsp;&nbsp;<input type="text" th:field="*{name}" /><br />
+			</span>
+			<span id="error" th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span><br />
+			<span>Age:&nbsp;&nbsp;&nbsp;&nbsp;<input type="number" th:field="*{age}" /></span><br /><br />
+			<input class="button" type="submit" value="Register" />
+		</form>
+		
+		<p style="color: grey">
+			Current visiter count: <span id="count" th:text=${count} style="color: gold"></span>
+		</p>
+		
+		<script>
+			setInterval(function(){
+				$.get("/currentcount", function(result){
+					$("#count").text(result);
+				})
+			},3000);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Welcome</title>
+		<link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+				integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+				crossorigin="anonymous">
+	</script>
+	</head>
+	<body style="background-color: black; color: green; text-align: center">
+		<div id="lights"></div>
+		<h2>Welcome to HoHoHo</h2>
+		<h3>Have you been behaving properly?</h3>
+		<div id=textContent>
+			<p>
+				Because Santa is coming this December 25 to give prizes to those 
+				who have been well-mannered. Since Santa has to roam around the 
+				world, he has asked us to setup a website where he can quickly
+				get a list of good children and give them presents from their gift list.
+			</p>
+		</div>
+		
+		<p>
+		If you have been well-mannered this year, register now to get gifts from Santa.
+		</p>
+		<p>
+		<input  class="button" type="button"  onclick="location.href='/createuser'" value="Register" >
+		<input class="button" type="button"  onclick="location.href='/allusers'" value="View All Participants" >
+		<p style="color: grey">
+			Current visiter count: <span id="count" th:text=${count} style="color: gold"></span>
+		</p>
+		
+		<script>
+			setInterval(function(){
+				$.get("/currentcount", function(result){
+					$("#count").text(result);
+				})
+			},3000);
+		</script>
+	</body>
+</html>
